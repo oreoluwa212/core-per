@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import { FaAngleDown } from "react-icons/fa";
 import { footerCountryUK } from "../assets";

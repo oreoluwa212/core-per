@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Hero from "../components/Hero";
 import Footer from "../components/Footer";
@@ -6,7 +6,7 @@ import JoinInFree from "../components/JoinInFree";
 import Exhibitions from "../components/Exhibitions";
 import ArtInvestments from "../components/ArtInvestments";
 import Carousel from "../components/Carousel";
-import { cloud, flower, heroImg1, heroImg4, item1c, item2b, item2c, item2d, item3a, ray } from "../assets";
+import { flower, heroImg1, item1c, item2b, item2c, item2d, item3a } from "../assets";
 import LatestArtCarousel from "../components/LatestArtCarousel";
 
 const cards = [

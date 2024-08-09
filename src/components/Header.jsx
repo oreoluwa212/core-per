@@ -1,4 +1,3 @@
-import React from "react";
 import { PiShoppingCartSimpleFill } from "react-icons/pi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import SimpleBtn from "./buttons/SimpleBtn";
@@ -41,8 +40,8 @@ const Header = () => {
         <Link to={"/cart"}>
           <PiShoppingCartSimpleFill className="text-2xl" />
         </Link>
-        <SimpleBtn className={"px-[32px]"}>Log In</SimpleBtn>
-        <SimpleBtn className={"px-[32px] hover:bg-white hover:text-black hover:font-semibold border-white border"}>
+        <SimpleBtn href={"/selection"} className={"px-[32px]"}>Log In</SimpleBtn>
+        <SimpleBtn href={"/selection"} className={"px-[32px] hover:bg-white hover:text-black hover:font-semibold border-white border"}>
           Sign Up
         </SimpleBtn>
       </div>

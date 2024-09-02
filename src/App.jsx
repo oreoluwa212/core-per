@@ -12,6 +12,7 @@ import SignUpAdmin from "./pages/signUp/admin";
 import SignUpClient from "./pages/signUp/client";
 import SignInAdmin from "./pages/signin/admin";
 import SignInClient from "./pages/signin/client";
+import OverviewPage from "./pages/dashboard/admin/OverviewPage";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/signup/client" element={<SignUpClient />} />
           <Route path="/signin/admin" element={<SignInAdmin />} />
           <Route path="/signin/client" element={<SignInClient />} />
+          <Route path="/dashboard/admin" element={<OverviewPage />} />
         </Routes>
       </Router>
     </CartProvider>

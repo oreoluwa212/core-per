@@ -24,9 +24,6 @@ const exhibitions = [
 
 const Exhibitions = () => {
   const navigate = useNavigate();
-  const handleClick = () => {
-    navigate("/galleries");
-  };
   return (
     <section className="bg-gradient-to-b from-[#0F0A0F] to-[#302B30] text-white px-6 w-full flex flex-col h-fit justify-between items-center py-16">
       <h2 className="text-[26px] font-semibold mb-8 px-2 text-center uppercase">
@@ -34,18 +31,15 @@ const Exhibitions = () => {
       </h2>
       <div className="flex lgss:flex-row flex-col justify-between items-center w-full lgss:w-[78%] py-6">
         <div className="px-[5%]">
-          <SimpleBtn
-            onClick={handleClick}
-            className="px-[32px] flex items-center gap-3"
-          >
+          <SimpleBtn className="px-[32px] flex items-center gap-3">
             Select a location <FaAngleDown />
           </SimpleBtn>
         </div>
         <SimpleBtn
-          onClick={handleClick}
-          className="px-[32px] lgss:flex hidden border-white border"
+          href={"/galleries/products"}
+          className="px-[32px] border-white border"
         >
-          See more...
+          See more
         </SimpleBtn>
       </div>
       <div className="flex lgss:hidden flex-col lgss:py-10 w-full justify-center items-center">
@@ -54,11 +48,12 @@ const Exhibitions = () => {
         </div>
         <div className="w-[90%] flex flex-col justify-start items-start space-y-4">
           <div className="flex lgss:max-w-[600px] w-full items-end justify-end py-6">
-            <Link to={"/galleries"}>
-            <SimpleBtn className="px-[32px] border-white border">
+            <SimpleBtn
+              href={"/galleries/products"}
+              className="px-[32px] border-white border"
+            >
               See more
             </SimpleBtn>
-            </Link>
           </div>
           {exhibitions.map((exhibition, index) => (
             <div

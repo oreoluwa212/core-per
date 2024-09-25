@@ -61,35 +61,35 @@ const Carousel = ({ cards }) => {
         className={"text-center text-white"}
       />
       <div className="w-full flex justify-center items-center">
-      <div className="w-[80%] lgss:mt-5 lgss:py-10 overflow-hidden">
-        <div
-          className="flex transition-transform justify-end gap-12 items-end duration-500"
-          style={{
-            transform: `translateX(-${
-              currentIndex * (cardWidth + cardMargin)
-            }px)`,
-            width: `${totalCards.length * (cardWidth + cardMargin)}px`,
-            transition: isTransitioning
-              ? `transform ${transitionDuration}ms`
-              : "none",
-          }}
-        >
-          {totalCards.map((card, index) => (
-            <div
-              key={index}
-              className={`flex-shrink-0 cursor-pointer transition-transform duration-500 ${
-                expandedCardIndex === index % cards.length ? "scale-150" : ""
-              }`}
-            >
-              {card.type === "small" ? (
-                <SmallCard {...card} />
-              ) : (
-                <LargeCard {...card} />
-              )}
-            </div>
-          ))}
+        <div className="w-[80%] lgss:mt-5 lgss:py-10 overflow-hidden">
+          <div
+            className="flex transition-transform justify-end gap-12 items-end duration-500"
+            style={{
+              transform: `translateX(-${
+                currentIndex * (cardWidth + cardMargin)
+              }px)`,
+              width: `${totalCards.length * (cardWidth + cardMargin)}px`,
+              transition: isTransitioning
+                ? `transform ${transitionDuration}ms`
+                : "none",
+            }}
+          >
+            {totalCards.map((card, index) => (
+              <div
+                key={index}
+                className={`flex-shrink-0 cursor-pointer transition-transform duration-500 ${
+                  expandedCardIndex === index % cards.length ? "scale-150" : ""
+                }`}
+              >
+                {card.type === "small" ? (
+                  <SmallCard {...card} />
+                ) : (
+                  <LargeCard {...card} />
+                )}
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
       </div>
 
       <SliderArrow
@@ -100,9 +100,9 @@ const Carousel = ({ cards }) => {
       />
 
       <div className="w-full flex my-5 justify-center items-center">
-        <Link to={"/galleries/products"}>
-          <SimpleBtn className={"px-[32px] border"}>See more</SimpleBtn>
-        </Link>
+        <SimpleBtn href={"/galleries/products"} className={"px-[32px] border"}>
+          See more
+        </SimpleBtn>
       </div>
     </div>
   );

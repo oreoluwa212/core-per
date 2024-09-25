@@ -1,51 +1,80 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
 .custom-arrow {
-   z-index: 2;
-   position: absolute;
-   top: 50%;
-   transform: translateY(-50%);
+  z-index: 2;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .custom-next-arrow {
-   right: 10px;
+  right: 10px;
 }
 
 .arrow {
-   padding: 14px;
-   background: black;
-   height: 50px;
-   width: 50px;
-   border-radius: 12px;
-   color: white;
-   margin-left: 40px;
-   margin-top: -40px;
-   box-shadow: 2px 2px 2px 0px black;
+  padding: 14px;
+  background: black;
+  height: 50px;
+  width: 50px;
+  border-radius: 12px;
+  color: white;
+  margin-left: 40px;
+  margin-top: -40px;
+  box-shadow: 2px 2px 2px 0px black;
 }
 
 .slider-container {
-   position: relative;
+  position: relative;
 }
 
 .slider-wrapper {
-   position: relative;
-   width: 100%;
+  position: relative;
+  width: 100%;
 }
 
+.table-responsive {
+   overflow-x: auto; /* Enable horizontal scrolling */
+ }
+ 
+ /* Ensure that the table maintains its layout */
+ .table {
+   width: 100%; /* Make sure the table takes the full width */
+   border-collapse: collapse; /* Collapse borders */
+ }
+ 
+ th, td {
+   white-space: nowrap; /* Prevent text from wrapping */
+ }
+ 
 @media (min-width: 1001px) {
-   .custom-width {
-      width: 25%;
-   }
+  .custom-width {
+    width: 25%;
+  }
 }
 
 @media (max-width: 1000px) {
-   .custom-width {
-      width: 80%;
-   }
+  .custom-width {
+    width: 80%;
+  }
+}
+
+/* Add this to your global CSS file or Tailwind config */
+@media (max-width: 768px) {
+  .fixed {
+    position: fixed;
+  }
+
+  .translate-x-full {
+    transform: translateX(100%);
+  }
+
+  .translate-x-0 {
+    transform: translateX(0);
+  }
 }
 
 @media (max-width: 580px) {
-   .custom-width {
-      width: 100%;
-   }
+  .custom-width {
+    width: 100%;
+  }
 }

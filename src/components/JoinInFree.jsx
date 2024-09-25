@@ -40,11 +40,12 @@ function JoinInFree() {
           />
         ))}
         <div className="pt-14 flex lgss:flex-row flex-col w-full lgss:space-x-7 items-center">
-          <SimpleBtn className={"lgss:w-[25%] w-[45%]"}>Log In</SimpleBtn>
+          <SimpleBtn href={"/selection"}>Log In</SimpleBtn>
           <SimpleBtn
-            className={"px-6 w-[50%] lgss:w-[25%] border-white border"}
+            href={"/selection"}
+            className="px-[32px] border-white border"
           >
-            Sign Up
+            Sign up
           </SimpleBtn>
         </div>
       </div>

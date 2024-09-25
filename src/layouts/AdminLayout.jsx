@@ -17,9 +17,7 @@ export default function AdminLayout({ children }) {
       <div className="flex flex-1">
         <AdminSidebar isOpen={isSidebarOpen} />
         <main className="flex-1 bg-white p-3 md:p-12">
-          <Suspense fallback={<div>Loading...</div>}>
-            {children}
-          </Suspense>
+          <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
         </main>
       </div>
     </div>

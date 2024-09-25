@@ -5,7 +5,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-import { ClipLoader } from "react-spinners"; // Import the spinner you want to use
+import { ClipLoader } from "react-spinners";
 import "react-toastify/dist/ReactToastify.css";
 
 const SignInAdmin = () => {
@@ -24,20 +24,19 @@ const SignInAdmin = () => {
 
   const password = watch("password");
 
+  const apiUrl = import.meta.env.VITE_APP_API_URL;
+
   const onSubmit = async (data) => {
     setLoading(true);
     setSubmitError("");
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/auth/admin/signin",
-        {
-          email: data.email,
-          password: data.password,
-        }
-      );
+      const response = await axios.post(`${apiUrl}/auth/admin/signin`, {
+        email: data.email,
+        password: data.password,
+      });
 
       if (response.data.msg === "Admin signed in successfully") {
-        toast.success("Successfully signed in!"); // Show success toast
+        toast.success("Successfully signed in!");
         navigate("/dashboard/admin");
       } else {
         setSubmitError(
@@ -45,7 +44,7 @@ const SignInAdmin = () => {
         );
         toast.error(
           response.data.msg || "An error occurred. Please try again."
-        ); // Show error toast
+        );
       }
     } catch (error) {
       setSubmitError(
@@ -53,7 +52,7 @@ const SignInAdmin = () => {
       );
       toast.error(
         error.response?.data?.message || "An error occurred. Please try again."
-      ); // Show error toast
+      );
     } finally {
       setLoading(false);
     }
@@ -78,11 +77,11 @@ const SignInAdmin = () => {
           />
         </div>
         <div className="lg:px-[15%] px-7 mt-10 flex flex-col gap-[10%]">
-          <Link to={"/"}>
-            <div className="lg:justify-center lg:mx-0 flex px-6 pt-16">
+          <div className="lg:justify-center lg:mx-0 flex px-6 pt-16">
+            <Link to={"/"}>
               <img src={logo} alt="" className="h-[30px] lg:h-[45px]" />
-            </div>
-          </Link>
+            </Link>
+          </div>
           <div>
             <div>
               <div className="h-[60px] flex gap-[20px] border-[1px] border-[#AFAFAF] justify-center rounded-[8px] items-center mt-[20px]">
@@ -155,7 +154,7 @@ const SignInAdmin = () => {
                       className="h-[52px] w-full rounded-[10px] border px-4 py-2 text-black outline-none sm:text-[18px]"
                     />
                     <span
-                      className="absolute right-2 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                      className="absolute right-4 text-lg top-12 text-black transform cursor-pointer"
                       onClick={() => setShowPassword((prev) => !prev)}
                     >
                       {showPassword ? <FaEyeSlash /> : <FaEye />}
@@ -177,7 +176,7 @@ const SignInAdmin = () => {
                   <div className="mt-6">
                     <button
                       type="submit"
-                      className={`w-full rounded-[10px] bg-gray-700 border-white py-4 text-white flex items-center justify-center ${
+                      className={`w-full rounded-[10px] bg-teal py-4 text-white flex items-center justify-center ${
                         loading ? "opacity-50" : "hover:bg-primary-110"
                       }`}
                       disabled={loading}
@@ -187,7 +186,6 @@ const SignInAdmin = () => {
                       ) : (
                         "Sign In"
                       )}{" "}
-                      {/* Show spinner when loading */}
                     </button>
                   </div>
                   {submitError && (

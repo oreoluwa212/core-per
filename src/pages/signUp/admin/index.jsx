@@ -35,44 +35,37 @@ const SignUpAdmin = () => {
     setPasswordTyping(password?.length > 0 || false);
   }, [password]);
 
-  // Use the correct prefix for Vite
-  const apiUrl = import.meta.env.VITE_API_URL;
+  const apiUrl = import.meta.env.VITE_APP_API_URL;
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post(
-        `http://localhost:5000/api/auth/admin/signup`,
-        data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await axios.post(`${apiUrl}/auth/admin/signup`, data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       if (response.status === 200) {
         setSubmitSuccess(true);
-        // Redirect to admin dashboard directly
         navigate("/signin/admin");
       } else {
         setErrorMessage(response.data.message || "Authentication failed");
-        setTimeout(() => setErrorMessage(""), 3000); // Hide error after 3 seconds
+        setTimeout(() => setErrorMessage(""), 3000);
       }
     } catch (error) {
       if (error.response) {
         setErrorMessage(error.response.data.message || "Authentication failed");
-        setTimeout(() => setErrorMessage(""), 3000); // Hide error after 3 seconds
+        setTimeout(() => setErrorMessage(""), 3000);
       } else {
-        console.error("Error:", error);
         setErrorMessage("An unexpected error occurred. Please try again.");
-        setTimeout(() => setErrorMessage(""), 3000); // Hide error after 3 seconds
+        setTimeout(() => setErrorMessage(""), 3000);
       }
     }
   };
 
   return (
     <div>
-      <div className="lg:grid-cols-2 grid grid-cols-1 bg-black text-white">
+      <div className="lg:grid-cols-2 grid grid-cols-1 h-screen bg-black text-white">
         <div className="lg:flex h-full hidden">
           <img
             src={heroImg4}
@@ -81,11 +74,11 @@ const SignUpAdmin = () => {
           />
         </div>
         <div className="lg:px-[15%] px-7 mt-10 flex flex-col gap-[10%]">
-          <Link to={"/"}>
-            <div className="lg:justify-center lg:mx-0 flex px-6 pt-16">
+          <div className="lg:justify-center lg:mx-0 flex px-6 pt-16">
+            <Link to={"/"}>
               <img src={logo} alt="" className="h-[30px] lg:h-[45px]" />
-            </div>
-          </Link>
+            </Link>
+          </div>
           <div className="w-full flex justify-center items-center">
             <div className="my-auto w-full rounded-[16px] p-6">
               <div className="mb-4 flex justify-center rounded-[62px] border">
@@ -121,7 +114,7 @@ const SignUpAdmin = () => {
                     type="text"
                     placeholder="John Doe"
                     {...register("name", { required: "Name is required" })}
-                    className="h-[52px] w-full rounded-[10px] border px-4 py-2 text-base text-secondary-70 outline-none sm:text-[18px]"
+                    className="h-[52px] w-full rounded-[10px] border px-4 py-2 text-black outline-none sm:text-[18px]"
                   />
                   {errors.name && (
                     <p className="mt-1 text-sm text-critical-120">
@@ -134,7 +127,7 @@ const SignUpAdmin = () => {
                 <div className="mb-4">
                   <label
                     htmlFor="email"
-                    className="mb-2 block text-[16px] text-secondary-120"
+                    className="mb-2 block text-[16px] text-secondary-70"
                   >
                     Email
                   </label>
@@ -143,7 +136,7 @@ const SignUpAdmin = () => {
                     type="email"
                     placeholder="johndoe@example.com"
                     {...register("email", { required: "Email is required" })}
-                    className="h-[52px] w-full rounded-[10px] border px-4 py-2 text-base text-secondary-70 outline-none sm:text-[18px]"
+                    className="h-[52px] w-full rounded-[10px] border px-4 py-2 text-black outline-none sm:text-[18px]"
                   />
                   {errors.email && (
                     <p className="mt-1 text-sm text-critical-120">
@@ -173,7 +166,7 @@ const SignUpAdmin = () => {
                           message: "Password did not meet criteria",
                         },
                       })}
-                      className="h-[52px] w-full text-black rounded-[10px] border px-4 py-2 text-base text-secondary-70 outline-none sm:text-[18px]"
+                      className="h-[52px] w-full text-black rounded-[10px] border px-4 py-2 outline-none sm:text-[18px]"
                     />
                     <span
                       className="absolute text-black right-4 top-4 text-lg cursor-pointer"
@@ -253,7 +246,7 @@ const SignUpAdmin = () => {
                   type="submit"
                   disabled={!allCriteriaMet}
                   className={`w-full rounded-[15px] py-[16px] mt-5 text-center text-base uppercase sm:text-[18px] ${
-                    allCriteriaMet ? "bg-primary-500" : "bg-gray-300"
+                    allCriteriaMet ? "bg-teal" : "bg-gray-300"
                   } transition duration-200`}
                 >
                   Sign Up

@@ -27,7 +27,7 @@ const Selection = () => {
         <div className="flex justify-center flex-col lg:flex-row gap-[40px] px-6">
           <div
             className={`border-[#AFAFAF] border-[1px] md:h-[400px] h-[300px] lg:w-[40%] w-full rounded-xl ${
-              selectedOption === "admin" ? "bg-[#008080] text-white" : ""
+              selectedOption === "admin" ? "bg-teal text-white" : ""
             }`}
             onClick={() => handleSelect("admin")}
           >
@@ -43,7 +43,7 @@ const Selection = () => {
             <div className="pt-20 text-center">
               <h2
                 className={`text-[32px] fw-bold ${
-                  selectedOption === "admin" ? "text-white" : "text-[#008080]"
+                  selectedOption === "admin" ? "text-white" : "text-teal"
                 }`}
               >
                 Admin
@@ -59,7 +59,7 @@ const Selection = () => {
           </div>
           <div
             className={`border-[#AFAFAF] border-[1px] md:h-[400px] h-[300px] lg:w-[40%] w-full rounded-xl ${
-              selectedOption === "client" ? "bg-[#008080] text-white" : ""
+              selectedOption === "client" ? "bg-teal text-white" : ""
             }`}
             onClick={() => handleSelect("client")}
           >
@@ -75,7 +75,7 @@ const Selection = () => {
             <div className="pt-20 text-center">
               <h2
                 className={`text-[32px] fw-bold ${
-                  selectedOption === "client" ? "text-white" : "text-[#008080]"
+                  selectedOption === "client" ? "text-white" : "text-teal"
                 }`}
               >
                 Clients
@@ -97,7 +97,7 @@ const Selection = () => {
             <button
               className={`h-[80px] lg:w-[400px] px-8 w-full rounded-xl text-[20px] fw-bold ${
                 selectedOption
-                  ? "bg-[#008080] text-white"
+                  ? "bg-teal text-white"
                   : "bg-[#8FCACA] text-[#6D6D6D]"
               }`}
               disabled={!selectedOption}
@@ -109,7 +109,7 @@ const Selection = () => {
         <div>
           <h2 className="text-center pt-2 pb-10 text-[16px]">
             Already have an account?
-            <span className="text-[#008080] pl-2 fw-bold">
+            <span className="text-teal pl-2 fw-bold">
               <Link
                 to={
                   selectedOption === "admin"

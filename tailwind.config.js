@@ -10,6 +10,7 @@ module.exports = {
         primary: "#111111",
         joinInBg: "#0E0E0E",
         footerBg: "#313233",
+        teal: "#008080",
       },
       fontFamily: {
         montserrat: ["Montserrat", "sans-serif"],

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 
 const PublishProductModal = ({ isOpen, onClose, onSubmit }) => {
@@ -8,14 +8,15 @@ const PublishProductModal = ({ isOpen, onClose, onSubmit }) => {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [currency, setCurrency] = useState("USD");
-  const [imageFile, setImageFile] = useState(null); // State for the image file
+  const [imageFile, setImageFile] = useState(null);
+
+  const modalRef = useRef();
 
   const handleFileChange = (e) => {
-    setImageFile(e.target.files[0]); // Set the selected file
+    setImageFile(e.target.files[0]);
   };
 
   const handleSubmit = async () => {
-    // Create a FormData object to send data as multipart/form-data
     const formData = new FormData();
     formData.append("name", productName);
     formData.append("price", price);
@@ -24,7 +25,7 @@ const PublishProductModal = ({ isOpen, onClose, onSubmit }) => {
     formData.append("category", category);
     formData.append("currency", currency);
     if (imageFile) {
-      formData.append("image", imageFile); // Add the image file to FormData
+      formData.append("image", imageFile);
     }
 
     try {
@@ -37,8 +38,8 @@ const PublishProductModal = ({ isOpen, onClose, onSubmit }) => {
           },
         }
       );
-      console.log("Product created:", response.data); // Log the response or handle it as needed
-      onSubmit(response.data); // Optionally call the onSubmit function to refresh the product list or notify the parent
+      console.log("Product created:", response.data);
+      onSubmit(response.data);
 
       // Clear form fields after submission
       setProductName("");
@@ -46,20 +47,39 @@ const PublishProductModal = ({ isOpen, onClose, onSubmit }) => {
       setQuantity(0);
       setDescription("");
       setCategory("");
-      setCurrency("USD");
-      setImageFile(null); // Reset the image file
-
+      setCurrency("NGN");
+      setImageFile(null);
       onClose();
     } catch (error) {
-      console.error("Error creating product:", error.response.data); // Handle errors
+      console.error("Error creating product:", error.response.data);
     }
   };
+
+  const handleClickOutside = (event) => {
+    if (modalRef.current && !modalRef.current.contains(event.target)) {
+      onClose();
+    }
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      document.body.style.overflow = "hidden"; // Prevent body scroll
+    } else {
+      document.body.style.overflow = ""; // Reset body scroll
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.body.style.overflow = ""; // Reset body scroll on cleanup
+    };
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed lg:inset-0 top-[8rem] lg:bg-black bg-opacity-50 flex items-center justify-center">
-      <div className="bg-white rounded-lg shadow-lg p-8 w-96">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div ref={modalRef} className="bg-white p-6 rounded-lg shadow-lg w-96">
         <h2 className="text-xl font-semibold lg:mb-6">Publish Product</h2>
 
         <div className="lg:mb-4">
@@ -68,7 +88,7 @@ const PublishProductModal = ({ isOpen, onClose, onSubmit }) => {
           </label>
           <input
             type="text"
-            className="w-full border border-gray-300 rounded px-3 py-2"
+            className="w-full border outline-teal border-gray-300 rounded px-3 py-2"
             value={productName}
             onChange={(e) => setProductName(e.target.value)}
           />
@@ -77,7 +97,7 @@ const PublishProductModal = ({ isOpen, onClose, onSubmit }) => {
         <div className="lg:mb-4">
           <label className="block text-gray-700">Product Description</label>
           <textarea
-            className="w-full border border-gray-300 rounded px-3 py-2"
+            className="w-full border outline-teal border-gray-300 rounded px-3 py-2"
             rows="4"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -87,7 +107,7 @@ const PublishProductModal = ({ isOpen, onClose, onSubmit }) => {
         <div className="mb-4">
           <label className="block text-gray-700">Category</label>
           <select
-            className="w-full border border-gray-300 rounded px-3 py-2"
+            className="w-full border outline-teal border-gray-300 rounded px-3 py-2"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
@@ -108,7 +128,7 @@ const PublishProductModal = ({ isOpen, onClose, onSubmit }) => {
         <div className="mb-4">
           <label className="block text-gray-700">Currency</label>
           <select
-            className="w-full border border-gray-300 rounded px-3 py-2"
+            className="w-full outline-teal border border-gray-300 rounded px-3 py-2"
             value={currency}
             onChange={(e) => setCurrency(e.target.value)}
           >
@@ -117,7 +137,6 @@ const PublishProductModal = ({ isOpen, onClose, onSubmit }) => {
             <option value="GBP">GBP</option>
             <option value="JPY">JPY</option>
             <option value="NGN">NGN</option>
-            {/* Add more currencies as needed */}
           </select>
         </div>
 
@@ -128,48 +147,39 @@ const PublishProductModal = ({ isOpen, onClose, onSubmit }) => {
             </label>
             <input
               type="number"
-              className="w-24 border border-gray-300 rounded px-3 py-2"
+              className="w-24 outline-teal border border-gray-300 rounded px-3 py-2"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
             />
           </div>
           <div>
             <label className="block text-gray-700">
-              How much is available for sale?
+              How many are you selling?
             </label>
             <input
               type="number"
-              className="w-24 border border-gray-300 rounded px-3 py-2"
+              className="w-24 outline-teal border border-gray-300 rounded px-3 py-2"
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
             />
           </div>
         </div>
 
-        {/* Add the file input for image upload */}
         <div className="mb-4">
           <label className="block text-gray-700">Upload Image</label>
           <input
             type="file"
-            className="w-full border border-gray-300 rounded px-3 py-2"
+            className="border outline-teal border-gray-300 rounded px-3 py-2 w-full"
             onChange={handleFileChange}
           />
         </div>
 
-        <div className="flex justify-end space-x-2">
-          <button
-            onClick={onClose}
-            className="border border-gray-300 text-gray-700 px-4 py-2 rounded-lg"
-          >
-            Back
-          </button>
-          <button
-            onClick={handleSubmit}
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg"
-          >
-            Publish
-          </button>
-        </div>
+        <button
+          className="bg-teal text-white px-4 py-2 rounded hover:bg-teal-600"
+          onClick={handleSubmit}
+        >
+          Publish
+        </button>
       </div>
     </div>
   );

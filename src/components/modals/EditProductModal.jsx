@@ -1,107 +1,135 @@
-import { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
-const EditProductModal = ({ product, onClose }) => {
-  const [name, setName] = useState(product.name);
-  const [availableQuantity, setAvailableQuantity] = useState(product.availableQuantity);
-  const [unitSellingPrice, setUnitSellingPrice] = useState(product.unitSellingPrice);
-  const [description, setDescription] = useState(product.description || "");
-  const [category, setCategory] = useState(product.category || "");
-  const [currency, setCurrency] = useState(product.currency || "");
+const EditProductModal = ({ isOpen, onClose, product, onSubmit }) => {
+  const [formData, setFormData] = useState({
+    name: "",
+    category: "",
+    description: "",
+    price: "",
+    currency: "",
+    image: null,
+  });
 
-  const handleSave = () => {
-    // Save the edited details
-    console.log({
-      id: product.id,
-      name,
-      availableQuantity,
-      unitSellingPrice,
-      description,
-      category,
-      currency
-    });
+  const modalRef = useRef();
 
-    // Close the modal
-    onClose();
+  useEffect(() => {
+    if (product) {
+      setFormData({
+        name: product.name || "",
+        category: product.category || "",
+        description: product.description || "",
+        price: product.price || "",
+        currency: product.currency || "",
+        image: null,
+      });
+    }
+  }, [product]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleImageChange = (e) => {
+    setFormData((prev) => ({ ...prev, image: e.target.files[0] }));
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    onSubmit(formData);
+  };
+
+  const handleClickOutside = (event) => {
+    if (modalRef.current && !modalRef.current.contains(event.target)) {
+      onClose();
+    }
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      document.body.style.overflow = "hidden"; // Prevent body scroll
+    } else {
+      document.body.style.overflow = ""; // Reset body scroll
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.body.style.overflow = ""; // Reset body scroll on cleanup
+    };
+  }, [isOpen]);
+
+  if (!isOpen) return null;
+
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 bg-gray-700 bg-opacity-50">
-      <div className="bg-white p-6 rounded-md w-1/2">
-        <h2 className="text-2xl mb-4">Edit Product</h2>
-
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Product Name</label>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div ref={modalRef} className="bg-white p-6 rounded-lg shadow-lg w-96">
+        <button
+          className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+          onClick={onClose}
+        >
+          &times;
+        </button>
+        <h3 className="mb-4 text-lg font-semibold">Edit Product</h3>
+        <form onSubmit={handleFormSubmit}>
           <input
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+            name="name"
+            value={formData.name}
+            onChange={handleInputChange}
+            placeholder="Product Name"
+            className="block w-full mb-2 p-2 border rounded"
+            required
           />
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Available Quantity</label>
           <input
-            type="number"
-            value={availableQuantity}
-            onChange={(e) => setAvailableQuantity(e.target.value)}
-            className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+            type="text"
+            name="category"
+            value={formData.category}
+            onChange={handleInputChange}
+            placeholder="Category"
+            className="block w-full mb-2 p-2 border rounded"
+            required
           />
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Unit Selling Price</label>
-          <input
-            type="number"
-            value={unitSellingPrice}
-            onChange={(e) => setUnitSellingPrice(e.target.value)}
-            className="mt-1 block w-full border border-gray-300 rounded-md p-2"
-          />
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Description</label>
           <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+            name="description"
+            value={formData.description}
+            onChange={handleInputChange}
+            placeholder="Description"
+            className="block w-full mb-2 p-2 border rounded"
+            required
           />
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Category</label>
+          <input
+            type="number"
+            name="price"
+            value={formData.price}
+            onChange={handleInputChange}
+            placeholder="Price"
+            className="block w-full mb-2 p-2 border rounded"
+            required
+          />
           <input
             type="text"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+            name="currency"
+            value={formData.currency}
+            onChange={handleInputChange}
+            placeholder="Currency"
+            className="block w-full mb-2 p-2 border rounded"
+            required
           />
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Currency</label>
           <input
-            type="text"
-            value={currency}
-            onChange={(e) => setCurrency(e.target.value)}
-            className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+            type="file"
+            name="image"
+            onChange={handleImageChange}
+            className="block w-full mb-2 p-2 border rounded"
           />
-        </div>
 
-        <div className="flex justify-end">
           <button
-            onClick={onClose}
-            className="bg-gray-300 text-gray-700 px-4 py-2 rounded-md mr-2"
-          >
-            Cancel
-          </button>
-          <button
-            onClick={handleSave}
-            className="bg-blue-600 text-white px-4 py-2 rounded-md"
+            type="submit"
+            className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
           >
             Save
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );

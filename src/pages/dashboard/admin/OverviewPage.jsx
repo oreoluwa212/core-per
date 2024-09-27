@@ -27,19 +27,17 @@ const OverviewPage = () => {
   };
 
   return (
-    <div>
-      <AdminLayout>
-        <div className="flex justify-center mt-8">
-          <UploadProductCard onUpload={handleUploadClick} />
-        </div>
-        <PublishProductModal
-          isOpen={isModalOpen}
-          onClose={handleCloseModal}
-          onSubmit={handleProductSubmit}
-        />
-        <ProductList products={products} />
-      </AdminLayout>
-    </div>
+    <AdminLayout>
+      <div className="flex justify-center mt-8">
+        <UploadProductCard onUpload={handleUploadClick} />
+      </div>
+      <PublishProductModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onSubmit={handleProductSubmit}
+      />
+      <ProductList products={products} />
+    </AdminLayout>
   );
 };
 

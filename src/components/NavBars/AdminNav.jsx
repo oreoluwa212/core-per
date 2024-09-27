@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import { logo } from "../../assets";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { FaSearch, FaTimes } from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
 
 const AdminNav = ({ toggleSidebar, isSidebarOpen }) => {
   return (
-    <nav className="z-10 w-full text-black bg-white shadow-md h-fit py-4">
+    <nav className="fixed top-0 left-0 z-10 w-full text-black bg-white shadow-md h-fit py-4">
       <div className="flex items-center justify-between lg:px-[70px] overflow-hidden">
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center justify-between w-full">
@@ -13,9 +13,6 @@ const AdminNav = ({ toggleSidebar, isSidebarOpen }) => {
             <Link to="/">
               <img src={logo} alt="Logo" className="max-w-full h-auto" />
             </Link>
-          </div>
-          <div className="flex space-x-6">
-            <FaSearch />
           </div>
         </div>
 

@@ -125,7 +125,7 @@ const SignInClient = () => {
                       type="email"
                       placeholder="johndoe@example.com"
                       {...register("email", { required: "Email is required" })}
-                      className="h-[52px] w-full rounded-[10px] border px-4 py-2 text-base text-secondary-70 outline-none sm:text-[18px]"
+                      className="h-[52px] text-black w-full rounded-[10px] border px-4 py-2 text-base text-secondary-70 outline-none sm:text-[18px]"
                     />
                     {errors.email && (
                       <p className="mt-1 text-sm text-critical-120">
@@ -243,9 +243,8 @@ const SignInClient = () => {
                   </button>
                   <div className="pt-2">
                     <h2 className="text-center pb-10 text-[16px]">
-                      Different user?
+                      Not a CLient?
                       <span className="text-[#008080] fw-bold italic">
-                        {" "}
                         <Link to="/selection">Back to Selection</Link>
                       </span>
                     </h2>

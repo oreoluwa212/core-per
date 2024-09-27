@@ -36,32 +36,6 @@ const SignUpClient = () => {
     setSubmitSuccess(true);
     window.location.href = "/";
   };
-  // const onSubmit = async (data) => {
-  //     try {
-  //         const response = await fetch('/api/auth/signin', {
-  //             method: 'POST',
-  //             headers: {
-  //                 'Content-Type': 'application/json',
-  //             },
-  //             body: JSON.stringify(data),
-  //         });
-
-  //         if (response.ok) {
-  //             const { role } = await response.json();
-  //             setUserRole(role);
-
-  //             if (role === 'admin') {
-  //                 navigate('/admin-dashboard');
-  //             } else if (role === 'client') {
-  //                 navigate('/client-dashboard');
-  //             }
-  //         } else {
-  //             console.error('Authentication failed');
-  //         }
-  //     } catch (error) {
-  //         console.error('Error:', error);
-  //     }
-  // };
 
   return (
     <div>
@@ -151,7 +125,7 @@ const SignUpClient = () => {
                       type="email"
                       placeholder="johndoe@example.com"
                       {...register("email", { required: "Email is required" })}
-                      className="h-[52px] w-full rounded-[10px] border px-4 py-2 text-base text-secondary-70 outline-none sm:text-[18px]"
+                      className="h-[52px] text-black w-full rounded-[10px] border px-4 py-2 text-base text-secondary-70 outline-none sm:text-[18px]"
                     />
                     {errors.email && (
                       <p className="mt-1 text-sm text-critical-120">
@@ -261,9 +235,8 @@ const SignUpClient = () => {
                   </button>
                   <div className="pt-2">
                     <h2 className="text-center pb-10 text-[16px]">
-                      Different user?
-                      <span className="text-[#008080] fw-bold italic">
-                        {" "}
+                      Not a CLient?
+                      <span className="pl-1 text-[#008080] fw-bold italic">
                         <Link to="/selection">Back to Selection</Link>
                       </span>
                     </h2>

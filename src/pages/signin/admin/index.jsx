@@ -173,7 +173,10 @@ const SignInAdmin = () => {
                       Forgot Password?
                     </Link>
                   </div>
-                  <div className="mt-6">
+                  {submitError && (
+                    <p className="mt-2 text-sm text-red-500">{submitError}</p>
+                  )}
+                  <div className="mt-6 space-y-2">
                     <button
                       type="submit"
                       className={`w-full rounded-[10px] bg-teal py-4 text-white flex items-center justify-center ${
@@ -187,10 +190,15 @@ const SignInAdmin = () => {
                         "Sign In"
                       )}{" "}
                     </button>
+                    <p className="text-center">
+                      Not an admin?
+                      <Link to={"/selection"}>
+                        <span className="italic pl-1 text-teal">
+                          Back to selection
+                        </span>
+                      </Link>
+                    </p>
                   </div>
-                  {submitError && (
-                    <p className="mt-2 text-sm text-red-500">{submitError}</p>
-                  )}
                 </form>
               </div>
             </div>

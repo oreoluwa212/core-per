@@ -67,7 +67,7 @@ const Hero = () => {
                 Learn more
               </SimpleBtn>
               <SimpleBtn
-                onClick={handleBtnClick}
+                href={"/selection"}
                 className={"px-[32px] border-white border"}
               >
                 Get Started

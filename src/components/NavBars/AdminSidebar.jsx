@@ -13,18 +13,18 @@ const AdminSidebar = ({ isOpen }) => {
 
   return (
     <aside
-      className={`lgss:h-screen lgss:overflow-hidden lgss:flex bg-white shadow-md border z-1 text-lg top-0 left-0 h-screen w-1/2 lgss:w-1/6 transition-transform duration-300 ${
-        isOpen ? "block" : "hidden"
-      } md:block`}
+      className={`fixed top-0 left-0 h-screen w-64 bg-white shadow-md border z-1o transition-transform duration-300 ${
+        isOpen ? "translate-x-0" : "-translate-x-full"
+      } md:relative md:translate-x-0 md:w-1/6`}
     >
-      <ul className="flex flex-col gap-10 w-full justify-center items-center pt-[50%]">
-        <li className="mb-4">
+      <ul className="flex flex-col justify-center items-center h-full gap-6 w-full pt-16">
+        <li>
           <Link to="/dashboard/ahome" className="flex items-center space-x-4">
             <FaHome />
             <span>Home</span>
           </Link>
         </li>
-        <li className="mb-4">
+        <li>
           <Link to="#" className="flex items-center space-x-4">
             <FaUser />
             <span>Products</span>

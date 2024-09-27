@@ -65,7 +65,7 @@ const SignUpAdmin = () => {
 
   return (
     <div>
-      <div className="lg:grid-cols-2 grid grid-cols-1 h-screen bg-black text-white">
+      <div className="lg:grid-cols-2 grid grid-cols-1 h-screen overflow-hidden bg-black text-white">
         <div className="lg:flex h-full hidden">
           <img
             src={heroImg4}
@@ -73,11 +73,23 @@ const SignUpAdmin = () => {
             className="object-cover w-full max-h-screen"
           />
         </div>
-        <div className="lg:px-[15%] px-7 mt-10 flex flex-col gap-[10%]">
+        <div className="lg:px-[15%] px-7 mt-10 flex flex-col">
           <div className="lg:justify-center lg:mx-0 flex px-6 pt-16">
             <Link to={"/"}>
               <img src={logo} alt="" className="h-[30px] lg:h-[45px]" />
             </Link>
+          </div>
+          <div className="pt-16">
+            <div className="h-[60px] flex gap-[20px] border-[1px] border-[#AFAFAF] justify-center rounded-[8px] items-center mt-[20px]">
+              <div>
+                <h2 className="text-[20px] fw-bold">Continue with Google</h2>
+              </div>
+            </div>
+            <div className="flex items-center justify-center my-4">
+              <div className="flex-grow border-t border-[#AFAFAF]"></div>
+              <span className="fw-bold mx-4">Or</span>
+              <div className="flex-grow border-t border-[#AFAFAF]"></div>
+            </div>
           </div>
           <div className="w-full flex justify-center items-center">
             <div className="my-auto w-full rounded-[16px] p-6">
@@ -102,7 +114,7 @@ const SignUpAdmin = () => {
               </div>
               <form onSubmit={handleSubmit(onSubmit)}>
                 {/* Name Input */}
-                <div className="mb-4">
+                <div>
                   <label
                     htmlFor="name"
                     className="mb-2 block text-[16px] text-secondary-120"
@@ -245,12 +257,20 @@ const SignUpAdmin = () => {
                 <button
                   type="submit"
                   disabled={!allCriteriaMet}
-                  className={`w-full rounded-[15px] py-[16px] mt-5 text-center text-base uppercase sm:text-[18px] ${
+                  className={`w-full rounded-[15px] py-[16px] text-center text-base uppercase sm:text-[18px] ${
                     allCriteriaMet ? "bg-teal" : "bg-gray-300"
                   } transition duration-200`}
                 >
                   Sign Up
                 </button>
+                <p className="text-center">
+                  Not an admin?
+                  <Link to={"/selection"}>
+                    <span className="italic pl-1 text-teal">
+                      Back to selection
+                    </span>
+                  </Link>
+                </p>
 
                 {/* Success Message */}
                 {submitSuccess && (
